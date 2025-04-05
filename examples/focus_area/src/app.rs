@@ -99,10 +99,13 @@ impl Widget for &App {
                 Block::bordered()
                     .borders(Borders::ALL)
                     .border_set(border::ROUNDED)
-                    .style(Style::default().fg(match self.focus_area {
-                        FocusArea::Area1 => FOCUSED_COLOR,
-                        _ => UNFOCUSED_COLOR,
-                    }))
+                    .style(Style::default().fg(
+                        // 条件に応じて色を変更
+                        match self.focus_area {
+                            FocusArea::Area1 => FOCUSED_COLOR,
+                            _ => UNFOCUSED_COLOR,
+                        },
+                    ))
                     .title("[1] Area 1"),
             )
             .render(area1_area, buf);
@@ -113,10 +116,13 @@ impl Widget for &App {
                 Block::bordered()
                     .borders(Borders::ALL)
                     .border_set(border::ROUNDED)
-                    .style(Style::default().fg(match self.focus_area {
-                        FocusArea::Area2 => FOCUSED_COLOR,
-                        _ => UNFOCUSED_COLOR,
-                    }))
+                    .style(Style::default().fg(
+                        // 条件に応じて色を変更
+                        match self.focus_area {
+                            FocusArea::Area2 => FOCUSED_COLOR,
+                            _ => UNFOCUSED_COLOR,
+                        },
+                    ))
                     .title("[2] Area 2"),
             )
             .render(area2_area, buf);
@@ -127,10 +133,13 @@ impl Widget for &App {
                 Block::bordered()
                     .borders(Borders::ALL)
                     .border_set(border::ROUNDED)
-                    .style(Style::default().fg(match self.focus_area {
-                        FocusArea::Area3 => FOCUSED_COLOR,
-                        _ => UNFOCUSED_COLOR,
-                    }))
+                    .style(Style::default().fg(
+                        // 条件に応じて色を変更
+                        match self.focus_area {
+                            FocusArea::Area3 => FOCUSED_COLOR,
+                            _ => UNFOCUSED_COLOR,
+                        },
+                    ))
                     .title("[3] Area 3"),
             )
             .render(area3_area, buf);
@@ -141,10 +150,13 @@ impl Widget for &App {
                 Block::bordered()
                     .borders(Borders::ALL)
                     .border_set(border::ROUNDED)
-                    .style(Style::default().fg(match self.focus_area {
-                        FocusArea::Area4 => FOCUSED_COLOR,
-                        _ => UNFOCUSED_COLOR,
-                    }))
+                    .style(Style::default().fg(
+                        // 条件に応じて色を変更
+                        match self.focus_area {
+                            FocusArea::Area4 => FOCUSED_COLOR,
+                            _ => UNFOCUSED_COLOR,
+                        },
+                    ))
                     .title("[4] Area 4"),
             )
             .render(area4_area, buf);
@@ -155,10 +167,13 @@ impl Widget for &App {
                 Block::bordered()
                     .borders(Borders::ALL)
                     .border_set(border::ROUNDED)
-                    .style(Style::default().fg(match self.focus_area {
-                        FocusArea::Area5 => FOCUSED_COLOR,
-                        _ => UNFOCUSED_COLOR,
-                    }))
+                    .style(Style::default().fg(
+                        // 条件に応じて色を変更
+                        match self.focus_area {
+                            FocusArea::Area5 => FOCUSED_COLOR,
+                            _ => UNFOCUSED_COLOR,
+                        },
+                    ))
                     .title("[5] Area 5"),
             )
             .render(area5_area, buf);
