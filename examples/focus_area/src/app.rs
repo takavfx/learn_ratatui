@@ -21,6 +21,18 @@ enum FocusArea {
     Area5,
 }
 
+impl FocusArea {
+    fn next(&self) -> Self {
+        match self {
+            FocusArea::Area1 => FocusArea::Area2,
+            FocusArea::Area2 => FocusArea::Area3,
+            FocusArea::Area3 => FocusArea::Area4,
+            FocusArea::Area4 => FocusArea::Area5,
+            FocusArea::Area5 => FocusArea::Area1,
+        }
+    }
+}
+
 // Application Struct
 pub struct App {
     focus_area: FocusArea,
@@ -70,6 +82,7 @@ impl App {
             KeyCode::Char('3') => self.focus_area = FocusArea::Area3,
             KeyCode::Char('4') => self.focus_area = FocusArea::Area4,
             KeyCode::Char('5') => self.focus_area = FocusArea::Area5,
+            KeyCode::Char('n') => self.focus_area = self.focus_area.next(),
             _ => {}
         }
     }
