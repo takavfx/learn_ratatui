@@ -13,6 +13,7 @@ use ratatui::{
 const FOCUSED_COLOR: Color = Color::Green;
 const UNFOCUSED_COLOR: Color = Color::White;
 
+#[derive(PartialEq)]
 enum FocusArea {
     Area1,
     Area2,
@@ -33,7 +34,6 @@ impl FocusArea {
     }
 }
 
-// Application Struct
 pub struct App {
     focus_area: FocusArea,
     quit: bool,
@@ -48,7 +48,7 @@ impl Default for App {
     }
 }
 
-// Main Logic of the application
+// メインロジックの実装
 impl App {
     pub fn run(&mut self, terminal: &mut DefaultTerminal) -> io::Result<()> {
         while !self.quit {
@@ -88,7 +88,7 @@ impl App {
     }
 }
 
-// Widget implementation for the App
+// &App に対して Widget 実装
 impl Widget for &App {
     fn render(self, area: Rect, buf: &mut Buffer) {
         let main_layout =
@@ -106,89 +106,44 @@ impl Widget for &App {
             Layout::vertical([Constraint::Percentage(80), Constraint::Percentage(20)]);
         let [area4_area, area5_area] = right_area_layout.areas(right_area);
 
-        // Area 1
         Paragraph::new("Area 1")
-            .block(
-                Block::bordered()
-                    .borders(Borders::ALL)
-                    .border_set(border::ROUNDED)
-                    .style(Style::default().fg(
-                        // 条件に応じて色を変更
-                        match self.focus_area {
-                            FocusArea::Area1 => FOCUSED_COLOR,
-                            _ => UNFOCUSED_COLOR,
-                        },
-                    ))
-                    .title("[1] Area 1"),
-            )
+            .block(self.create_borders(FocusArea::Area1).title("[1] Area 1"))
             .render(area1_area, buf);
 
         // Area 2
         Paragraph::new("Area 2")
-            .block(
-                Block::bordered()
-                    .borders(Borders::ALL)
-                    .border_set(border::ROUNDED)
-                    .style(Style::default().fg(
-                        // 条件に応じて色を変更
-                        match self.focus_area {
-                            FocusArea::Area2 => FOCUSED_COLOR,
-                            _ => UNFOCUSED_COLOR,
-                        },
-                    ))
-                    .title("[2] Area 2"),
-            )
+            .block(self.create_borders(FocusArea::Area2).title("[2] Area 2"))
             .render(area2_area, buf);
 
         // Area 3
         Paragraph::new("Area 3")
-            .block(
-                Block::bordered()
-                    .borders(Borders::ALL)
-                    .border_set(border::ROUNDED)
-                    .style(Style::default().fg(
-                        // 条件に応じて色を変更
-                        match self.focus_area {
-                            FocusArea::Area3 => FOCUSED_COLOR,
-                            _ => UNFOCUSED_COLOR,
-                        },
-                    ))
-                    .title("[3] Area 3"),
-            )
+            .block(self.create_borders(FocusArea::Area3).title("[3] Area 3"))
             .render(area3_area, buf);
 
         // Area 4
         Paragraph::new("Area 4")
-            .block(
-                Block::bordered()
-                    .borders(Borders::ALL)
-                    .border_set(border::ROUNDED)
-                    .style(Style::default().fg(
-                        // 条件に応じて色を変更
-                        match self.focus_area {
-                            FocusArea::Area4 => FOCUSED_COLOR,
-                            _ => UNFOCUSED_COLOR,
-                        },
-                    ))
-                    .title("[4] Area 4"),
-            )
+            .block(self.create_borders(FocusArea::Area4).title("[4] Area 4"))
             .render(area4_area, buf);
 
         // Area 5
         Paragraph::new("Area 5")
-            .block(
-                Block::bordered()
-                    .borders(Borders::ALL)
-                    .border_set(border::ROUNDED)
-                    .style(Style::default().fg(
-                        // 条件に応じて色を変更
-                        match self.focus_area {
-                            FocusArea::Area5 => FOCUSED_COLOR,
-                            _ => UNFOCUSED_COLOR,
-                        },
-                    ))
-                    .title("[5] Area 5"),
-            )
+            .block(self.create_borders(FocusArea::Area5).title("[5] Area 5"))
             .render(area5_area, buf);
+    }
+}
+
+// Widget レンダリングのためのヘルパー関数実装
+impl App {
+    fn create_borders(&self, focus_at: FocusArea) -> Block<'_> {
+        let border_color = if self.focus_area == focus_at {
+            FOCUSED_COLOR
+        } else {
+            UNFOCUSED_COLOR
+        };
+
+        Block::bordered()
+            .borders(Borders::ALL)
+            .border_set(border::ROUNDED)
+            .style(Style::default().fg(border_color))
     }
 }
