@@ -2,3 +2,12 @@
 name = "learn_ratatui"
 version = "0.1.0"
 edition = "2024"
+
+[workspace]
+resolver = "2"
+members = ["examples/*"]
+default-members = ["examples/*"]
+
+[workspace.dependencies]
+crossterm = "0.29.0"
+ratatui = "0.29.0"
