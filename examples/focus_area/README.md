@@ -1,0 +1,5 @@
+# Focus Area
+
+```
+cargo run
+```
